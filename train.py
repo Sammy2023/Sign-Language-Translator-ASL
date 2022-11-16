@@ -3,7 +3,7 @@ from tensorflow.keras.models import Sequential
 from math import ceil
 import matplotlib.pyplot as plt
 
-training_dir = 'F:\\collegue\\GP project\\dataset\\asl_alphabet_train\\asl_alphabet_train'
+training_dir = 'dataset/asl_alphabet_train/asl_alphabet_train'
 
 #loading the images from training directory
 data_gatherer = DataGatherer(training_dir)
@@ -50,4 +50,4 @@ plt.title("classifier")
 plt.show();
 
 #run the below line to save the classifier
-#Model.save(path, classifier)
+Model.save('./classifier', classifier)

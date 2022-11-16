@@ -11,9 +11,8 @@ mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 cap = None
 
-#pre-trained saved model with 99% accuracy
-classifier = Model.load_classifier('grayscale_classifier.h5')
-
+# pre-trained saved model with 99% accuracy
+# classifier = Model.load_classifier('grayscale_classifier.h5')
 
 def draw_region(image, center):
     cropped_image = cv2.rectangle(image, (center[0] - 130, center[1] - 130),
@@ -54,8 +53,9 @@ def get_char(gesture):
            'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
            'W', 'X', 'Y', 'Z', 'del', 'nothing', 'space']
 
-    return Model.predict(classes, classifier, gesture)
-
+    # return Model.predict(classes, classifier, gesture)
+    print("hello")
+    return 'A'
 
 def AddCharToWord(word, curr_char):
     temp_word = word
@@ -109,7 +109,7 @@ def frame_video_stream(names, curr_char, prev_char, word, sentence, *args):
             update_frame(full_img, kwargs['vid_label'])
 
             try:
-                #print('from try')
+                print('from try')
                 gray = cv2.cvtColor(cropped_img, cv2.COLOR_BGR2GRAY)
                 gray = DataGatherer().edge_detection(gray)
 
@@ -146,6 +146,7 @@ def frame_video_stream(names, curr_char, prev_char, word, sentence, *args):
 
                     prev_char = curr_char
             except:
+                print('Error with')
                 pass
     
     kwargs['vid_label'].after(1, frame_video_stream, names, curr_char, prev_char, word, sentence, *args)
@@ -178,6 +179,7 @@ def pipe_cam(gui, vid_label):
     np.set_printoptions(formatter={'float_kind':float_formatter})
     
     global cap
+    # 0 means it is feeding from video
     cap = cv2.VideoCapture(0)
 
     labels_num = 5
